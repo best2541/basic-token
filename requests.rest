@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozfSwiaWF0IjoxNjIxNTcxNTk3fQ.qs57ThPXzFc_cMylDofdeHrvJ_WyJt-MuUOHr2Qc-nw
+###
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+[
+    {"username": "Kyle"}
+]
+###
+post http://localhost:3000/api/login
