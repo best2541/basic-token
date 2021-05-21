@@ -16,13 +16,13 @@ app.get('/api', (req, res)=>{
 app.post('/api/login',(req,res) =>{
   //auth
   const user = {id:3}
-  const token =jwt.sign({user},'my_secret_key')
+  const token =jwt.sign({user},process.env.ACCESS_TOKEN_SECRET)
   res.json({
     token:token
   })
 })
 app.get('/api/protected', ensureToken, (req, res)=>{
-  jwt.verify(req.token, 'my_secret_key',(err,data) =>{
+  jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET,(err,data) =>{
     if(err) {
       res.sendStatus(403)
     } else{
