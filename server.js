@@ -7,29 +7,40 @@ const jwt = require('jsonwebtoken')
 
 app.use(express.json())
 
-app.get('/api', (req, res)=>{
+
+const databases = [
+  {
+    username: "Kyle",
+    title : "dev"
+  },{
+    username: "2",
+    title : "dev2"
+  }
+]
+app.get('/api', (req, res) => {
   res.json({
     text: 'my api'
   })
 })
-
-app.post('/api/login',(req,res) =>{
+/*/
+app.post('/api/login', (req, res) => {
   //auth
-  const user = {id:3}
-  const token =jwt.sign({user},process.env.ACCESS_TOKEN_SECRET)
+  const users = req.body.username
+  //const user = { name: users }
+  const token = jwt.sign(users, process.env.ACCESS_TOKEN_SECRET)
   res.json({
-    token:token
+    users,
+    token
   })
-})
-app.get('/api/protected', ensureToken, (req, res)=>{
-  jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET,(err,data) =>{
-    if(err) {
+})/*/
+
+app.get('/api/protected', ensureToken, (req, res) => {
+  jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+    if (err) {
       res.sendStatus(403)
-    } else{
-      res.json({
-        text: 'this is protected',
-        data: data
-      })
+    } else {
+      //res.json(databases.filter(database => databases.username == data))
+      res.json(databases.filter(database =>database.username == data))
     }
   })
   res.json({
@@ -37,7 +48,7 @@ app.get('/api/protected', ensureToken, (req, res)=>{
   })
 })
 
-function ensureToken(req,res,next){
+function ensureToken(req, res, next) {
   const bearerHeader = req.headers["authorization"]
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(" ")
