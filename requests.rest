@@ -1,11 +1,11 @@
 GET http://localhost:3000/api/protected
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozfSwiaWF0IjoxNjIxNTcyNDk1fQ.oPxngyOzYfCdBhZT2a8Sut6O6FUXGd7Wes8LrudYImM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM4NTUwODUsImV4cCI6MTYyMzg1NTE0NX0.CQDQRgur7QzQKj6b1NVMbDlabejFakU44YMzjz0CiL8
 ###
-POST  http://localhost:3000/login
+POST http://localhost:3000/api/login
 Content-Type: application/json
 
-[
-    {"username": "Kyle"}
-]
+{
+    "username":"bass"
+}
+
 ###
-post http://localhost:3000/api/login
