@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-
+const mysql2 = require('mysql2')
 const express = require('express')
 const app = express()
 const jwt = require('jsonwebtoken')
@@ -22,7 +22,7 @@ app.get('/api', (req, res) => {
     text: 'my api'
   })
 })
-/*/
+
 app.post('/api/login', (req, res) => {
   //auth
   const users = req.body.username
@@ -32,9 +32,10 @@ app.post('/api/login', (req, res) => {
     users,
     token
   })
-})/*/
+})
 
 app.get('/api/protected', ensureToken, (req, res) => {
+  console.log(req.token)
   jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
     if (err) {
       res.sendStatus(403)
